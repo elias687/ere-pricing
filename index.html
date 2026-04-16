@@ -18,109 +18,120 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 12px;
+    padding: 0;
   }
 
   .sim {
     background: #ffffff;
-    border: 1px solid #E8EAE4;
-    border-radius: 20px;
-    padding: 24px 20px;
+    border: none;
+    border-radius: 0;
+    padding: 44px 56px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 520px;
+    gap: 28px;
+    width: 75%;
+    max-width: 900px;
   }
 
-  .sim-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
-  .header-title { font-size: 14px; font-weight: 600; color: #0F1A0C; }
-  .header-sub { font-size: 13px; color: #6B7C6A; }
+  .sim-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+  .header-title { font-size: 18px; font-weight: 600; color: #0F1A0C; }
+  .header-sub { font-size: 16px; color: #6B7C6A; }
 
-  .section { display: flex; flex-direction: column; gap: 10px; }
+  .section { display: flex; flex-direction: column; gap: 14px; }
   .row { display: flex; justify-content: space-between; align-items: center; }
-  .label { font-size: 13px; color: #6B7C6A; }
-  .count { font-size: 18px; font-weight: 600; color: #22c55e; }
+  .label { font-size: 16px; color: #6B7C6A; }
+  .count { font-size: 24px; font-weight: 700; color: #22c55e; }
 
   input[type=range] {
     -webkit-appearance: none;
-    width: 100%; height: 4px;
+    width: 100%; height: 6px;
     border-radius: 4px; outline: none; cursor: pointer;
   }
   input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 20px; height: 20px; border-radius: 50%;
-    background: #22c55e; border: 2px solid #fff;
-    box-shadow: 0 0 0 1.5px #22c55e; cursor: pointer;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #22c55e; border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #22c55e; cursor: pointer;
   }
   input[type=range]::-moz-range-thumb {
-    width: 20px; height: 20px; border-radius: 50%;
-    background: #22c55e; border: 2px solid #fff;
-    box-shadow: 0 0 0 1.5px #22c55e; cursor: pointer;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #22c55e; border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #22c55e; cursor: pointer;
   }
 
-  .marks { display: flex; justify-content: space-between; font-size: 11px; color: #6B7C6A; padding: 0 2px; }
+  .marks { display: flex; justify-content: space-between; font-size: 13px; color: #6B7C6A; padding: 0 2px; }
 
-  /* Durée chips */
-  .chips { display: flex; gap: 8px; }
+  .chips { display: flex; gap: 12px; }
   .chip {
-    flex: 1; padding: 10px 8px; border-radius: 10px;
+    flex: 1; padding: 14px 12px; border-radius: 12px;
     border: 1px solid #E8EAE4; background: transparent;
-    color: #6B7C6A; font-size: 13px; cursor: pointer;
+    color: #6B7C6A; font-size: 16px; cursor: pointer;
     font-family: inherit; transition: all 0.15s ease;
     text-align: center; line-height: 1;
   }
   .chip.active { background: #22c55e; border-color: #22c55e; color: #000; font-weight: 600; }
 
-  /* Engagement chips */
-  .chips-commit { display: flex; gap: 6px; }
+  .chips-commit { display: flex; gap: 10px; }
   .chip-commit {
-    flex: 1; padding: 10px 4px; border-radius: 12px;
+    flex: 1; padding: 16px 8px; border-radius: 14px;
     border: 1px solid #E8EAE4; background: transparent;
-    color: #6B7C6A; font-size: 11px; cursor: pointer;
+    color: #6B7C6A; font-size: 14px; cursor: pointer;
     font-family: inherit; display: flex; flex-direction: column;
-    align-items: center; gap: 3px; line-height: 1.3;
+    align-items: center; gap: 5px; line-height: 1.3;
     transition: all 0.15s ease; text-align: center;
   }
   .chip-commit.active { background: rgba(34,197,94,0.08); border-color: #22c55e; color: #166534; font-weight: 600; }
-  .badge { font-size: 10px; color: #22c55e; }
-  .badge-muted { font-size: 10px; color: #6B7C6A; }
-  .badge-red { font-size: 10px; color: #ef4444; font-weight: 700; }
+  .badge { font-size: 12px; color: #22c55e; }
 
-  /* Result */
   .result-box {
     background: #F7F8F6; border: 1px solid #E8EAE4;
-    border-radius: 14px; padding: 16px 18px;
+    border-radius: 16px; padding: 24px 28px;
     display: flex; align-items: center;
-    justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    justify-content: space-between; gap: 20px; flex-wrap: wrap;
   }
-  .result-left { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-  .result-label { font-size: 11px; color: #6B7C6A; text-transform: uppercase; letter-spacing: 0.05em; }
-  .result-price { font-size: clamp(26px, 6vw, 34px); font-weight: 700; color: #0F1A0C; line-height: 1; }
-  .result-unit { font-size: clamp(12px, 3vw, 15px); font-weight: 400; color: #6B7C6A; }
-  .result-per-video { font-size: 12px; color: #6B7C6A; margin-top: 2px; }
-  .result-total { font-size: 12px; color: #6B7C6A; margin-top: 1px; }
-  .result-diff { font-size: 12px; font-weight: 600; margin-top: 1px; }
+  .result-left { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .result-label { font-size: 12px; color: #6B7C6A; text-transform: uppercase; letter-spacing: 0.06em; }
+  .result-price { font-size: clamp(36px, 5vw, 48px); font-weight: 700; color: #0F1A0C; line-height: 1; }
+  .result-unit { font-size: clamp(14px, 2vw, 18px); font-weight: 400; color: #6B7C6A; }
+  .result-per-video { font-size: 14px; color: #6B7C6A; margin-top: 2px; }
+  .result-total { font-size: 14px; color: #6B7C6A; margin-top: 1px; }
+  .result-diff { font-size: 14px; font-weight: 600; margin-top: 1px; }
+
+  .result-disclaimer {
+    font-size: 12px;
+    color: #9BA89A;
+    margin-top: 6px;
+    font-style: italic;
+    line-height: 1.5;
+  }
 
   .cta {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 12px 16px; background: #22c55e; border: none;
-    border-radius: 10px; color: #000; font-weight: 600;
-    font-size: clamp(12px, 3vw, 14px); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 28px; background: #22c55e; border: none;
+    border-radius: 12px; color: #000; font-weight: 600;
+    font-size: 16px; text-decoration: none;
     white-space: nowrap; flex-shrink: 0;
     font-family: inherit; cursor: pointer;
     transition: background 0.15s ease;
+    text-align: center;
   }
   .cta:hover { background: #16a34a; }
 
-  .footer { font-size: 11px; color: #6B7C6A; text-align: center; line-height: 1.5; }
+  .footer {
+    font-size: 12px;
+    color: #9BA89A;
+    text-align: center;
+    line-height: 1.7;
+    font-style: italic;
+    border-top: 1px solid #F0F0EE;
+    padding-top: 16px;
+  }
 
-  /* Mobile */
-  @media (max-width: 400px) {
-    body { padding: 8px; }
-    .sim { padding: 20px 16px; gap: 18px; border-radius: 16px; }
-    .chip-commit { font-size: 10px; padding: 8px 3px; }
+  @media (max-width: 600px) {
+    .sim { width: 100%; padding: 24px 20px; gap: 20px; }
+    .chip { font-size: 14px; padding: 12px 8px; }
+    .chip-commit { font-size: 12px; padding: 12px 4px; }
     .result-box { flex-direction: column; align-items: flex-start; }
     .cta { width: 100%; justify-content: center; }
   }
@@ -131,8 +142,8 @@
 
   <div class="sim-header">
     <span class="dot"></span>
-    <span class="header-title">Simulateur d'upgrade</span>
-    <span class="header-sub">— explorez une montée en charge</span>
+    <span class="header-title">Simulateur de prix</span>
+    <span class="header-sub">— estimez votre budget en quelques secondes</span>
   </div>
 
   <div class="section">
@@ -159,12 +170,10 @@
     <span class="label">📅 Durée d'engagement</span>
     <div class="chips-commit" id="com-chips">
       <button class="chip-commit" data-val="0" data-mult="2.3">
-        <span>Sans eng.</span>
-        <span class="badge-red">×2,3</span>
+        <span>Sans engagement</span>
       </button>
       <button class="chip-commit" data-val="6" data-mult="1">
         <span>6 mois</span>
-        <span class="badge-muted">0%</span>
       </button>
       <button class="chip-commit active" data-val="12" data-mult="0.95">
         <span>12 mois</span>
@@ -179,20 +188,21 @@
 
   <div class="result-box">
     <div class="result-left">
-      <span class="result-label">Prix estimé</span>
+      <span class="result-label">Estimation indicative</span>
       <div class="result-price" id="price">1 235€<span class="result-unit"> HT / mois</span></div>
       <div class="result-per-video" id="per-video">soit <strong>123,50 €</strong> / vidéo</div>
       <div class="result-total" id="total">Engagement total : <strong>14 820 € HT</strong></div>
       <div class="result-diff" id="diff"></div>
+      <div class="result-disclaimer">Prix approximatif · Varie selon la complexité des vidéos</div>
     </div>
     <a class="cta" href="https://cal.com/ere-agency/rendez-vous-client" target="_blank">
-      ✦ Demander cet upgrade →
+      📞 Réserver un appel pour en discuter
     </a>
   </div>
 
   <p class="footer">
-    Tarifs indicatifs HT · Devis officiel sous 24h<br>
-    Simulation basée sur votre niveau de production actuel
+    Ce simulateur donne une estimation approximative. Le prix final est personnalisé selon votre projet<br>
+    et dépend fortement du niveau de complexité de chaque vidéo. Devis officiel sous 24h après échange.
   </p>
 
 </div>
