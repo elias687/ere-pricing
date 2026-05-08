@@ -81,8 +81,15 @@
     align-items: center; gap: 5px; line-height: 1.3;
     transition: all 0.15s ease; text-align: center;
   }
-  .chip-commit.active { background: rgba(34,197,94,0.08); border-color: #22c55e; color: #166534; font-weight: 600; }
+  .chip-commit.active {
+    background: rgba(34,197,94,0.08);
+    border-color: #22c55e; color: #166534; font-weight: 600;
+  }
   .badge { font-size: 12px; color: #22c55e; }
+  .badge-best {
+    font-size: 10px; background: #22c55e; color: #000;
+    padding: 2px 6px; border-radius: 20px; font-weight: 700;
+  }
 
   .result-box {
     background: #F7F8F6; border: 1px solid #E8EAE4;
@@ -97,14 +104,7 @@
   .result-per-video { font-size: 14px; color: #6B7C6A; margin-top: 2px; }
   .result-total { font-size: 14px; color: #6B7C6A; margin-top: 1px; }
   .result-diff { font-size: 14px; font-weight: 600; margin-top: 1px; }
-
-  .result-disclaimer {
-    font-size: 12px;
-    color: #9BA89A;
-    margin-top: 6px;
-    font-style: italic;
-    line-height: 1.5;
-  }
+  .result-disclaimer { font-size: 12px; color: #9BA89A; margin-top: 6px; font-style: italic; line-height: 1.5; }
 
   .cta {
     display: inline-flex; align-items: center; gap: 8px;
@@ -113,21 +113,29 @@
     font-size: 16px; text-decoration: none;
     white-space: nowrap; flex-shrink: 0;
     font-family: inherit; cursor: pointer;
-    transition: background 0.15s ease;
-    text-align: center;
+    transition: background 0.15s ease; text-align: center;
   }
   .cta:hover { background: #16a34a; }
 
   .footer {
-    font-size: 13px;
-    color: #4A5A48;
-    text-align: center;
-    line-height: 1.8;
-    background: #F0F9F0;
-    border: 1px solid #C6E8C6;
-    border-radius: 12px;
+    font-size: 13px; color: #4A5A48; text-align: center;
+    line-height: 1.8; background: #F0F9F0;
+    border: 1px solid #C6E8C6; border-radius: 12px;
     padding: 16px 20px;
   }
+
+  /* Comparaison alternant */
+  .vs-banner {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 13px;
+    color: #78350f;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .vs-banner strong { color: #92400e; }
 
   @media (max-width: 768px) {
     .sim { width: 100%; padding: 24px 18px; gap: 20px; }
@@ -145,6 +153,7 @@
     .cta { width: 100%; justify-content: center; font-size: 15px; padding: 15px 20px; }
     .footer { font-size: 13px; padding: 14px 16px; }
     .marks { font-size: 12px; }
+    .vs-banner { font-size: 12px; }
   }
 </style>
 </head>
@@ -157,17 +166,19 @@
     <span class="header-sub">estimez votre budget en quelques secondes</span>
   </div>
 
+  <!-- Vidéos slider — min 5 -->
   <div class="section">
     <div class="row">
       <span class="label">▶ Vidéos par mois</span>
       <span class="count" id="vid-count">10</span>
     </div>
-    <input type="range" id="vid-slider" min="1" max="15" step="1" value="10">
+    <input type="range" id="vid-slider" min="5" max="15" step="1" value="10">
     <div class="marks">
-      <span>1</span><span>4</span><span>7</span><span>11</span><span>15</span>
+      <span>5</span><span>7</span><span>9</span><span>12</span><span>15</span>
     </div>
   </div>
 
+  <!-- Durée -->
   <div class="section">
     <span class="label">⏱ Durée par vidéo</span>
     <div class="chips" id="dur-chips">
@@ -177,26 +188,26 @@
     </div>
   </div>
 
+  <!-- Engagement — 3 options : sans eng, 12 mois, 24 mois -->
   <div class="section">
     <span class="label">📅 Durée d'engagement</span>
     <div class="chips-commit" id="com-chips">
-      <button class="chip-commit" data-val="0" data-mult="2.3">
+      <button class="chip-commit" data-val="0" data-mult="1.5">
         <span>Sans engagement</span>
-      </button>
-      <button class="chip-commit" data-val="6" data-mult="1">
-        <span>6 mois</span>
       </button>
       <button class="chip-commit active" data-val="12" data-mult="0.95">
         <span>12 mois</span>
         <span class="badge">-5%</span>
       </button>
-      <button class="chip-commit" data-val="24" data-mult="0.88">
+      <button class="chip-commit" data-val="24" data-mult="0.80">
         <span>24 mois</span>
-        <span class="badge">-12%</span>
+        <span class="badge">-20%</span>
+        <span class="badge-best">Meilleur tarif</span>
       </button>
     </div>
   </div>
 
+  <!-- Résultat -->
   <div class="result-box">
     <div class="result-left">
       <span class="result-label">Estimation indicative</span>
@@ -211,13 +222,19 @@
     </a>
   </div>
 
+  <!-- Comparaison alternant -->
+  <div class="vs-banner" id="vs-banner">
+    Un poste motion design en interne coûte entre <strong>1 500€ et 3 500€/mois</strong> charges comprises. ERE AGENCY, c'est la même capacité de production — sans recrutement, sans risque, sans charge fixe.
+  </div>
+
   <p class="footer">
-    Ce simulateur donne une estimation approximative. Le prix final est personnalisé selon votre projet<br>
+    Ce simulateur donne une estimation approximative. Le prix final est personnalisé selon votre projet
     et dépend fortement du niveau de complexité de chaque vidéo. Devis officiel sous 24h après échange.
   </p>
 
 </div>
 <script>
+  // Référence : 1235€ = 10 vidéos × 130€ × 0.95 (12 mois)
   const PRICE_PER_VIDEO = { 30: 130, 45: 195, 60: 260 };
   let videos = 10, dur = 30, mult = 0.95, comVal = 12;
 
@@ -226,7 +243,7 @@
 
   function update() {
     const price = Math.round(videos * PRICE_PER_VIDEO[dur] * mult);
-    const pct = ((videos - 1) / 14) * 100;
+    const pct = ((videos - 5) / 10) * 100;
 
     document.getElementById('vid-slider').style.background =
       `linear-gradient(to right, #22c55e ${pct}%, #E8EAE4 ${pct}%)`;
@@ -246,6 +263,7 @@
       totalEl.style.display = 'none';
     }
 
+    // Diff vs 12 mois comme référence
     const ref = Math.round(videos * PRICE_PER_VIDEO[dur] * 0.95);
     const diff = price - ref;
     const diffEl = document.getElementById('diff');
