@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulateur ERE AGENCY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -44,12 +47,13 @@
   .count { font-size: 24px; font-weight: 700; color: #22c55e; }
 
   input[type=range] {
-    -webkit-appearance: none;
+    -webkit-appearance: none; appearance: none;
     width: 100%; height: 6px;
     border-radius: 4px; outline: none; cursor: pointer;
+    background: #E8EAE4;
   }
   input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    -webkit-appearance: none; appearance: none;
     width: 26px; height: 26px; border-radius: 50%;
     background: #22c55e; border: 3px solid #fff;
     box-shadow: 0 0 0 2px #22c55e; cursor: pointer;
@@ -59,6 +63,7 @@
     background: #22c55e; border: 3px solid #fff;
     box-shadow: 0 0 0 2px #22c55e; cursor: pointer;
   }
+  input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(34,197,94,0.35); }
 
   .marks { display: flex; justify-content: space-between; font-size: 13px; color: #6B7C6A; padding: 0 2px; }
 
@@ -71,6 +76,7 @@
     text-align: center; line-height: 1;
   }
   .chip.active { background: #22c55e; border-color: #22c55e; color: #000; font-weight: 600; }
+  .chip:focus-visible { outline: 2px solid #22c55e; outline-offset: 2px; }
 
   .chips-commit { display: flex; gap: 10px; }
   .chip-commit {
@@ -79,12 +85,13 @@
     color: #6B7C6A; font-size: 14px; cursor: pointer;
     font-family: inherit; display: flex; flex-direction: column;
     align-items: center; gap: 5px; line-height: 1.3;
-    transition: all 0.15s ease; text-align: center;
+    transition: all 0.15s ease; text-align: center; position: relative;
   }
   .chip-commit.active {
     background: rgba(34,197,94,0.08);
     border-color: #22c55e; color: #166534; font-weight: 600;
   }
+  .chip-commit:focus-visible { outline: 2px solid #22c55e; outline-offset: 2px; }
   .badge { font-size: 12px; color: #22c55e; }
   .badge-best {
     font-size: 10px; background: #22c55e; color: #000;
@@ -116,6 +123,7 @@
     transition: background 0.15s ease; text-align: center;
   }
   .cta:hover { background: #16a34a; }
+  .cta:focus-visible { outline: 2px solid #0F1A0C; outline-offset: 2px; }
 
   .footer {
     font-size: 13px; color: #4A5A48; text-align: center;
@@ -155,6 +163,10 @@
     .marks { font-size: 12px; }
     .vs-banner { font-size: 12px; }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -166,42 +178,45 @@
     <span class="header-sub">estimez votre budget en quelques secondes</span>
   </div>
 
-  <!-- Vidéos slider — min 5 -->
+  <!-- Vidéos slider — de 1 à 12 -->
   <div class="section">
     <div class="row">
       <span class="label">▶ Vidéos par mois</span>
-      <span class="count" id="vid-count">10</span>
+      <span class="count" id="vid-count">6</span>
     </div>
-    <input type="range" id="vid-slider" min="5" max="15" step="1" value="10">
+    <input type="range" id="vid-slider" min="1" max="12" step="1" value="6" aria-label="Nombre de vidéos par mois">
     <div class="marks">
-      <span>5</span><span>7</span><span>9</span><span>12</span><span>15</span>
+      <span>1</span><span>3</span><span>6</span><span>9</span><span>12</span>
     </div>
   </div>
 
   <!-- Durée -->
   <div class="section">
     <span class="label">⏱ Durée par vidéo</span>
-    <div class="chips" id="dur-chips">
-      <button class="chip active" data-val="30">30s</button>
-      <button class="chip" data-val="45">45s</button>
-      <button class="chip" data-val="60">60s</button>
+    <div class="chips" id="dur-chips" role="group" aria-label="Durée par vidéo">
+      <button class="chip active" data-val="30" aria-pressed="true">30s</button>
+      <button class="chip" data-val="45" aria-pressed="false">45s</button>
+      <button class="chip" data-val="60" aria-pressed="false">60s</button>
     </div>
   </div>
 
-  <!-- Engagement — 3 options : sans eng, 12 mois, 24 mois -->
+  <!-- Engagement — 3 options : 3 mois, 6 mois, 12 mois -->
   <div class="section">
     <span class="label">📅 Durée d'engagement</span>
-    <div class="chips-commit" id="com-chips">
-      <button class="chip-commit" data-val="0" data-mult="1.5">
+    <div class="chips-commit" id="com-chips" role="group" aria-label="Durée d'engagement">
+      <button class="chip-commit" data-val="0" data-mult="1.5" aria-pressed="false">
         <span>Sans engagement</span>
       </button>
-      <button class="chip-commit active" data-val="12" data-mult="0.95">
-        <span>12 mois</span>
+      <button class="chip-commit" data-val="3" data-mult="1" aria-pressed="false">
+        <span>3 mois</span>
+      </button>
+      <button class="chip-commit active" data-val="6" data-mult="0.95" aria-pressed="true">
+        <span>6 mois</span>
         <span class="badge">-5%</span>
       </button>
-      <button class="chip-commit" data-val="24" data-mult="0.80">
-        <span>24 mois</span>
-        <span class="badge">-20%</span>
+      <button class="chip-commit" data-val="12" data-mult="0.85" aria-pressed="false">
+        <span>12 mois</span>
+        <span class="badge">-15%</span>
         <span class="badge-best">Meilleur tarif</span>
       </button>
     </div>
@@ -211,13 +226,13 @@
   <div class="result-box">
     <div class="result-left">
       <span class="result-label">Estimation indicative</span>
-      <div class="result-price" id="price">1 235€<span class="result-unit"> HT / mois</span></div>
+      <div class="result-price" id="price">741€<span class="result-unit"> HT / mois</span></div>
       <div class="result-per-video" id="per-video">soit <strong>123,50 €</strong> / vidéo</div>
-      <div class="result-total" id="total">Engagement total : <strong>14 820 € HT</strong></div>
+      <div class="result-total" id="total">Engagement total : <strong>4 446 € HT</strong></div>
       <div class="result-diff" id="diff"></div>
       <div class="result-disclaimer">Prix approximatif · Varie selon la complexité des vidéos</div>
     </div>
-    <a class="cta" href="https://cal.com/ere-agency/rendez-vous-client" target="_blank">
+    <a class="cta" href="https://cal.com/ere-agency/rendez-vous-client" target="_blank" rel="noopener">
       📞 Réserver un appel pour en discuter
     </a>
   </div>
@@ -234,16 +249,17 @@
 
 </div>
 <script>
-  // Référence : 1235€ = 10 vidéos × 130€ × 0.95 (12 mois)
+  // Référence : 741€ = 6 vidéos × 130€ × 0.95 (6 mois)
   const PRICE_PER_VIDEO = { 30: 130, 45: 195, 60: 260 };
-  let videos = 10, dur = 30, mult = 0.95, comVal = 12;
+  const MULT_12_MOIS = 0.85; // multiplicateur de l'engagement 12 mois (référence de comparaison)
+  let videos = 6, dur = 30, mult = 0.95, comVal = 6;
 
   function fmt(n) { return n.toLocaleString('fr-FR'); }
   function fmtDec(n) { return Number.isInteger(n) ? fmt(n) : n.toFixed(2).replace('.', ','); }
 
   function update() {
     const price = Math.round(videos * PRICE_PER_VIDEO[dur] * mult);
-    const pct = ((videos - 5) / 10) * 100;
+    const pct = ((videos - 1) / 11) * 100;
 
     document.getElementById('vid-slider').style.background =
       `linear-gradient(to right, #22c55e ${pct}%, #E8EAE4 ${pct}%)`;
@@ -264,10 +280,10 @@
     }
 
     // Diff vs 12 mois comme référence
-    const ref = Math.round(videos * PRICE_PER_VIDEO[dur] * 0.95);
+    const ref = Math.round(videos * PRICE_PER_VIDEO[dur] * MULT_12_MOIS);
     const diff = price - ref;
     const diffEl = document.getElementById('diff');
-    if (mult !== 0.95) {
+    if (mult !== MULT_12_MOIS) {
       diffEl.style.display = 'block';
       diffEl.style.color = diff > 0 ? '#ef4444' : '#22c55e';
       diffEl.textContent = (diff > 0 ? '+' : '') + fmt(diff) + ' € / mois vs 12 mois';
@@ -282,16 +298,20 @@
 
   document.querySelectorAll('#dur-chips .chip').forEach(b => {
     b.addEventListener('click', function() {
-      document.querySelectorAll('#dur-chips .chip').forEach(x => x.classList.remove('active'));
-      this.classList.add('active');
+      document.querySelectorAll('#dur-chips .chip').forEach(x => {
+        x.classList.remove('active'); x.setAttribute('aria-pressed', 'false');
+      });
+      this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
       dur = +this.dataset.val; update();
     });
   });
 
   document.querySelectorAll('#com-chips .chip-commit').forEach(b => {
     b.addEventListener('click', function() {
-      document.querySelectorAll('#com-chips .chip-commit').forEach(x => x.classList.remove('active'));
-      this.classList.add('active');
+      document.querySelectorAll('#com-chips .chip-commit').forEach(x => {
+        x.classList.remove('active'); x.setAttribute('aria-pressed', 'false');
+      });
+      this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
       mult = +this.dataset.mult;
       comVal = +this.dataset.val; update();
     });
